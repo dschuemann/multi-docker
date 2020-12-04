@@ -1,5 +1,6 @@
 sudo: required
-language: generic 
+language: generic
+
 services:
   - docker
 
@@ -14,11 +15,9 @@ after_success:
   - docker build -t dschuemann/multi-nginx ./nginx
   - docker build -t dschuemann/multi-server ./server
   - docker build -t dschuemann/multi-worker ./worker
-
-  # Login to docker cli
+  # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
-  # Push images to Docker hub
+  # Take those images and push them to docker hub
   - docker push dschuemann/multi-client
   - docker push dschuemann/multi-nginx
   - docker push dschuemann/multi-server
